@@ -5,19 +5,18 @@ int* find (int* tab, int ile, int x);
 
 int main (void)
 {
-    int A [] = {4, 6, 7 ,7};
+    int A [] = {22, 22, 22, 22, 22, 22, 24, 25, 25};
     int rozmiar = sizeof(A)/sizeof(*A);
-    int n = 7;
+    int n = 24;
     int licznik = 0;
     int* ptr = find (A, rozmiar, n);
     if (ptr != NULL)
     {
         int* iter = ptr;
-        while (iter != A+rozmiar)
+        while (*iter == *ptr)
         {
-            if (*iter == *ptr)
-                licznik++;
-            iter++;
+           licznik++;
+           iter++;
         }
         printf ("Liczba znalezionych n = %d w tablicy: %d\n", n, licznik);   
     }
@@ -29,16 +28,16 @@ int main (void)
 
 int* find (int* tab, int ile, int x)
 {
-    int srednia = (*tab + *(tab+ile-1))/ile;
+    int mediana = tab [((ile+1)/2)-1];
     if (ile==1 && *tab == x)
         return tab;
     else if (ile == 1)
         return NULL;
 
     
-    if (x <= srednia)
+    if (x <= mediana) // w ten sposob zawsze zwrocony wskaznik bedzie pierwszym wystapieniem elementu w tablicy
         return find (tab, (ile+1)/2, x);
     else 
-        return find (tab+((ile+1)/2), (ile+1)/2, x);
+        return find (tab+((ile+1)/2), ((ile+1)/2), x);
     
 }

@@ -5,35 +5,25 @@ int main (int argc, char* argv[])
 {   
     if (argc == 1)
     {
-        printf ("Program bez argumentow wywolania!\n");
-        return 0;
+        printf("Brak argumentow wywolania!\n");
+        return 1;
     }
-    int rozmiar = 0;
-    for (int i = 1; i < argc; i++)
+    int rozmiar=0;
+    printf ("Wypisanie argumentow:\n");
+    for (int i = 1; i<argc; i++)
     {
-        rozmiar += strlen (argv[i]);
+        printf ("argv[%d]: %s\n", i, argv[i]);
+        rozmiar+=strlen(argv[i]);
     }
-    char napis [rozmiar+1] = "";
-    for (int i = 1; i < argc; i++)
+   printf ("Rozmiar=%d\n", rozmiar);
+    char napis [rozmiar+1];
+    napis [rozmiar] = '\0';
+    strcpy (napis, argv[1]);
+    for (int i = 2; i<argc; i++)
     {
-        int trueflag = 1;
-        for (int j = 1; j < i; j++)
-        {
-            if (strcmp (argv[i], argv[j]))
-            {
-            trueflag = 0;
-            break;
-            }
-        }
-    if (trueflag)
-     strcat (napis, argv[i]);
+        strcat (napis, argv[i]);
+        printf ("%d.%s\n", i, napis);
     }
-
-    printf ("Wszystkie argumenty:\n");    
-for (int i = 0; i < argc; i++)
-{
-    printf ("%s\n", argv[i]);
-}
-printf ("\nNapis polaczony: %s\n", napis);
-    return 0;
+    printf ("Wynik: %s\n", napis);
+   return 0;
 }
